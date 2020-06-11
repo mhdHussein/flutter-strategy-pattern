@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutterstrategypattern/clients/counter.dart';
+import 'package:flutterstrategypattern/clients/odd_counter.dart';
+
+import 'clients/even_counter.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,32 +35,21 @@ enum Types { odd, even }
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  var counterType = Types.odd;
+  // var counterType = Types.odd;
+  Counter _counterType;
+  var _counterId = Types.odd;
+
+  @override
+  void initState() {
+    _counterType = OddCounter(_counter);
+    super.initState();
+  }
 
   void _incrementCounter() {
     setState(() {
-      if (counterType == Types.odd) {
-        _increamentOdd();
-      } else if (counterType == Types.even) {
-        _increamentEven();
-      }
+      _counterType.setValue(_counter);
+      _counter = _counterType.performAddition();
     });
-  }
-
-  void _increamentOdd() {
-    if (_counter == 0 || (_counter % 2) == 0) {
-      _counter++;
-    } else if((_counter % 2) != 0){
-      _counter += 2;
-    }
-  }
-
-  void _increamentEven() {
-    if (_counter == 0 || (_counter % 2) == 0) {
-      _counter += 2;
-    } else if((_counter % 2) != 0){
-      _counter++;
-    }
   }
 
   @override
@@ -83,20 +76,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 Text("Odd increments"),
                 Radio(
                     value: Types.odd,
-                    groupValue: counterType,
-                    onChanged: (Types value) {
+                    groupValue: _counterId,
+                    onChanged: (_) {
                       setState(() {
-                        counterType = value;
+                        _counterId = Types.odd;
+                        _counterType = OddCounter(_counter);
                       });
                     }),
                 SizedBox(width: 16),
-                Text("Odd increments"),
+                Text("Even increments"),
                 Radio(
                     value: Types.even,
-                    groupValue: counterType,
-                    onChanged: (Types value) {
+                    groupValue: _counterId,
+                    onChanged: (_) {
                       setState(() {
-                        counterType = value;
+                        _counterId = Types.even;
+                        _counterType = EvenCounter(_counter);
                       });
                     }),
               ],

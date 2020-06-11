@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterstrategypattern/clients/counter.dart';
 import 'package:flutterstrategypattern/clients/odd_counter.dart';
+import 'package:flutterstrategypattern/value_object.dart';
 
 import 'clients/even_counter.dart';
 
@@ -34,21 +35,20 @@ class MyHomePage extends StatefulWidget {
 enum Types { odd, even }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  ValueObject _counterValue = ValueObject();
   // var counterType = Types.odd;
   Counter _counterType;
   var _counterId = Types.odd;
 
   @override
   void initState() {
-    _counterType = OddCounter(_counter);
+    _counterType = OddCounter();
     super.initState();
   }
 
   void _incrementCounter() {
     setState(() {
-      _counterType.setValue(_counter);
-      _counter = _counterType.performAddition();
+      _counterType.performAddition();
     });
   }
 
@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'The count is : ',
             ),
             Text(
-              '$_counter',
+              '${_counterValue.value}',
               style: Theme.of(context).textTheme.headline4,
             ),
             SizedBox(height: 16),
@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     onChanged: (_) {
                       setState(() {
                         _counterId = Types.odd;
-                        _counterType = OddCounter(_counter);
+                        _counterType = OddCounter();
                       });
                     }),
                 SizedBox(width: 16),
@@ -91,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     onChanged: (_) {
                       setState(() {
                         _counterId = Types.even;
-                        _counterType = EvenCounter(_counter);
+                        _counterType = EvenCounter();
                       });
                     }),
               ],

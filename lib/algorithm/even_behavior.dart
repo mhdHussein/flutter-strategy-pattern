@@ -1,12 +1,16 @@
+import 'package:flutterstrategypattern/algorithm/EvenOddChecker.dart';
 import 'package:flutterstrategypattern/algorithm/increment_contract.dart';
+import 'package:flutterstrategypattern/value_object.dart';
 
-class EvenBehavior implements IncrementContract {
+class EvenBehavior extends EvenOddChecker implements IncrementContract {
+  ValueObject _valueToCount = ValueObject();
+
   @override
-  int add(int value) {
-    if (value == 0 || (value % 2) == 0) {
-      return value += 2;
+  void add() {
+    if (isZero(_valueToCount.value) || isEven(_valueToCount.value)) {
+      _valueToCount.value += 2;
     } else {
-      return ++value;
+      ++_valueToCount.value;
     }
   }
 }

@@ -1,4 +1,4 @@
-import 'package:flutterstrategypattern/algorithm/EvenOddChecker.dart';
+import 'package:flutterstrategypattern/algorithm/even_odd_checker.dart';
 import 'package:flutterstrategypattern/algorithm/increment_contract.dart';
 import 'package:flutterstrategypattern/value_object.dart';
 

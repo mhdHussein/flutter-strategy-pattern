@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutterstrategypattern/algorithm/even_behavior.dart';
+import 'package:flutterstrategypattern/algorithm/odd_behavior.dart';
 import 'package:flutterstrategypattern/clients/counter.dart';
 import 'package:flutterstrategypattern/clients/odd_counter.dart';
 import 'package:flutterstrategypattern/value_object.dart';
@@ -36,7 +38,7 @@ enum Types { odd, even }
 
 class _MyHomePageState extends State<MyHomePage> {
   ValueObject _counterValue = ValueObject();
-  // var counterType = Types.odd;
+
   Counter _counterType;
   var _counterId = Types.odd;
 
@@ -80,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     onChanged: (_) {
                       setState(() {
                         _counterId = Types.odd;
-                        _counterType = OddCounter();
+                        _counterType.setIncrement(OddBehavior());
                       });
                     }),
                 SizedBox(width: 16),
@@ -91,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     onChanged: (_) {
                       setState(() {
                         _counterId = Types.even;
-                        _counterType = EvenCounter();
+                        _counterType.setIncrement(EvenBehavior());
                       });
                     }),
               ],

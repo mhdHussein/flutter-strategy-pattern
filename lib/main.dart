@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _increamentOdd() {
     if (_counter == 0 || (_counter % 2) == 0) {
       _counter++;
-    } else if((_counter % 2) != 0){
+    } else if ((_counter % 2) != 0) {
       _counter += 2;
     }
   }
@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _increamentEven() {
     if (_counter == 0 || (_counter % 2) == 0) {
       _counter += 2;
-    } else if((_counter % 2) != 0){
+    } else if ((_counter % 2) != 0) {
       _counter++;
     }
   }
@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       });
                     }),
                 SizedBox(width: 16),
-                Text("Odd increments"),
+                Text("Even increments"),
                 Radio(
                     value: Types.even,
                     groupValue: counterType,
